@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 export default function Login(){
     const [username, setUsername] = useState('')
@@ -13,8 +14,12 @@ export default function Login(){
     }
 
     function handleSubmit(e) {
-        console.log('User: ' + username)
-        console.log('Pass: ' + password)
+        axios.post('http://localhost:8000/api/token/', {
+            username: username,
+            password: password
+        })
+        .then( response => console.log(response))
+        .catch( error => console.log(error))
         e.preventDefault()
     }
     
