@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './Login'
 
 ReactDOM.render(
   <React.StrictMode>
-    <h1> H i !</h1>
+    <Login />
   </React.StrictMode>,
   document.getElementById('root')
 );
