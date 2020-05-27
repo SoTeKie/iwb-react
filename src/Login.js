@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import axios from 'axios'
+import {authInstance} from './api_requests'
 
 export default function Login(){
     const [username, setUsername] = useState('')
@@ -14,12 +14,20 @@ export default function Login(){
     }
 
     function handleSubmit(e) {
-        axios.post('http://localhost:8000/api/token/', {
+        authInstance.post('', {
             username: username,
             password: password
         })
-        .then( response => console.log(response))
-        .catch( error => console.log(error))
+        .then( response => {
+            localStorage.setItem('access', response.data.access)
+            localStorage.setItem('refresh', response.data.refresh)
+            localStorage.setItem('groups', response.data.groups)
+            localStorage.setItem('user', username)
+        })
+        .catch( error => {
+            console.log(`ERROR: ${error}`)
+            localStorage.clear()
+        })
         e.preventDefault()
     }
     
