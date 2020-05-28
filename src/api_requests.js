@@ -15,3 +15,44 @@ appInstance.interceptors.request.use( config => {
     config.headers.Authorization = `Bearer ${token}`
     return config
 })
+
+appInstance.interceptors.response.use( response => {
+    return response
+}, error => {
+
+    if (error.response.status !== 401) {
+        return new Promise((resolve, reject) => {
+            reject(error)
+        })
+    }
+
+    if (error.config.url === 'token/refresh' || error.response.message === 'Account is disabled.') {
+        localStorage.clear()
+        // reroute here
+
+        return new Promise((resolve, reject) => {
+            reject(error)
+        })
+    }
+
+    if (!localStorage.getItem('refresh')) {
+        return error
+        // reroute here
+    }
+
+    return authInstance.post('refresh/', {
+        refresh: localStorage.getItem('refresh')
+    })
+    .then(response => {
+        const newToken = response.data.access
+        localStorage.setItem('access', newToken) 
+
+        error.config.headers.Authorization = `Bearer ${newToken}`
+        return new Promise((resolve, reject) => { 
+            axios.request(error.config)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        })
+    })
+    .catch(error => console.log(error))
+})
