@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 const baseURL = 'http://localhost:8000/api/'
 
 export const authInstance = axios.create({
@@ -20,15 +19,16 @@ appInstance.interceptors.response.use( response => {
     return response
 }, error => {
 
+
     if (error.response.status !== 401) {
         return new Promise((resolve, reject) => {
             reject(error)
         })
     }
 
-    if (error.config.url === 'token/refresh' || error.response.message === 'Account is disabled.') {
+	console.log(error.config.url)
+    if (error.config.url === 'token/refresh/' || error.response.message === 'Account is disabled.') {
         localStorage.clear()
-        // reroute here
 
         return new Promise((resolve, reject) => {
             reject(error)
@@ -37,7 +37,6 @@ appInstance.interceptors.response.use( response => {
 
     if (!localStorage.getItem('refresh')) {
         return error
-        // reroute here
     }
 
     return authInstance.post('refresh/', {

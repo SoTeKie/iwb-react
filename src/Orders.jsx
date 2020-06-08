@@ -9,5 +9,7 @@ export default function Orders (){
 		.catch( error => console.log(error.response))
 	}
 
-	return()
+	return(
+		<button onClick={handleClick}> Get orders! </button>
+	)
 }
