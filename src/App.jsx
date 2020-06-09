@@ -1,12 +1,14 @@
 import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {Router, Switch, Route} from 'react-router-dom'
+import history from './history'
 import Login from './Login'
 import PrivateRoute from './PrivateRoute'
 import Orders from './Orders'
 
+
 export default function App() {
 	return (
-		<Router>
+		<Router history={history}>
 			<Switch>
 				<Route path='/login'>
 					<Login />
