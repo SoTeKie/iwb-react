@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {authInstance} from './api_requests'
+import history from './history'
 
 export default function Login(){
     const [username, setUsername] = useState('')
@@ -22,6 +23,7 @@ export default function Login(){
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('group', response.data.user_group)
             localStorage.setItem('user', username)
+			GroupRedirect(response.data.user_group)
         })
         .catch( error => {
             console.log(`ERROR: ${error}`)
@@ -45,4 +47,18 @@ export default function Login(){
             <button>Login!</button>
         </form>
     )
+}
+
+function GroupRedirect(group) {
+	if (group === 'Bartender'){
+		history.push('/orders')
+	}
+	else if (group === 'Table'){
+		history.push('/start-order')
+	}
+	else {
+		localStorage.clear()
+		history.push('/login')
+	}
+	
 }

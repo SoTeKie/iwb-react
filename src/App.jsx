@@ -4,7 +4,8 @@ import history from './history'
 import Login from './Login'
 import PrivateRoute from './PrivateRoute'
 import Orders from './Orders'
-
+import StartOrder from './StartOrder'
+import MakeOrder from './MakeOrder'
 
 export default function App() {
 	return (
@@ -16,8 +17,11 @@ export default function App() {
 				<PrivateRoute path='/orders'>
 					<Orders />
 				</PrivateRoute>
-				<PrivateRoute path='/items'>
-					<h1> Items </h1>
+				<PrivateRoute path='/start-order'>
+					<StartOrder />
+				</PrivateRoute>
+				<PrivateRoute path='/make-order'>
+					<MakeOrder />
 				</PrivateRoute>
 			</Switch>
 		</Router>
