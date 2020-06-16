@@ -1,11 +1,10 @@
 import React from 'react'
-import history from './history'
+import {Link} from 'react-router-dom'
 
 export default function StartOrder() {
-	function handleClick(){
-		history.push('/make-order')
-	}
 	return (
-		<button onClick={handleClick}> Start ordering! </button>
+		<Link to='/make-order'>
+			<button>Start ordering! </button>
+		</Link>
 	)
 }

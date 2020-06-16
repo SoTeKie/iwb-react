@@ -23,6 +23,7 @@ export default function App() {
 				<PrivateRoute path='/make-order'>
 					<MakeOrder />
 				</PrivateRoute>
+				<Route component={Login} /> 
 			</Switch>
 		</Router>
 	)
