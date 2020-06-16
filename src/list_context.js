@@ -1,3 +1,5 @@
-import {CreateContext} from 'react'
+import React from 'react'
 
-export default const listContext = CreateContext()
+const listContext = React.createContext()
+
+export default listContext
