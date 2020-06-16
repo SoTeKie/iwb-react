@@ -1,29 +1,34 @@
 import React from 'react'
-import {Router, Switch, Route} from 'react-router-dom'
+import {Router, Switch, Route, Redirect} from 'react-router-dom'
 import history from './history'
 import Login from './Login'
 import PrivateRoute from './PrivateRoute'
 import Orders from './Orders'
 import StartOrder from './StartOrder'
 import MakeOrder from './MakeOrder'
+import Store from './Store'
 
 export default function App() {
 	return (
 		<Router history={history}>
 			<Switch>
-				<Route path='/login'>
+				<Route exact path='/login'>
 					<Login />
 				</Route>
-				<PrivateRoute path='/orders'>
+				<PrivateRoute exact path='/orders'>
 					<Orders />
 				</PrivateRoute>
-				<PrivateRoute path='/start-order'>
+				<PrivateRoute exact path='/start-order'>
 					<StartOrder />
 				</PrivateRoute>
-				<PrivateRoute path='/make-order'>
-					<MakeOrder />
+				<PrivateRoute exact path='/make-order'>
+					<Store>
+						<MakeOrder />
+					</Store>
 				</PrivateRoute>
-				<Route component={Login} /> 
+				<Route path='*'>
+					<Redirect to='/login' />
+				</Route>
 			</Switch>
 		</Router>
 	)
