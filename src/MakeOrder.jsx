@@ -8,11 +8,19 @@ export default function MakeOrder(){
 		appInstance.get('/items')
 		.then(response => setItems(response.data))
 		.catch(error => console.log(error))
-		console.log(items)
 	},[])
 
 	return (
-		/*items.map( item => <h1>{item.name}</h1>)*/
-		items == null ? <h1>what</h1> : items.map(item => <h1 key={item.id}>{item.name}</h1>)
+		items == null ? <h1>what</h1> : items.map(item => <Item key={item.id} item={item}/>)
+	)
+}
+
+function Item(props){
+	return (
+		<div>
+			<h1>{props.item.name}</h1>
+			<h2>{props.item.price}</h2>
+			<hr />
+		</div>	
 	)
 }
