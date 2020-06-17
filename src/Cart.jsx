@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import listContext from './list_context'
+import {appInstance} from './api_requests'
 
 export default function Cart(){
 	const cart = useContext(listContext)
@@ -14,14 +15,36 @@ export default function Cart(){
 			</tr>
 		)
 	})
+	
+	function handleClick(){
+		const items = []
+
+		cart.items.map( item => {
+			items.push({
+				item_id: item.id,
+				quantity: item.amount
+			})
+		})
+
+		appInstance.post('/orders/', {
+			customer: localStorage.getItem('user'),
+			notes: '',
+			items: items
+		})
+		.then(response => console.log(response))
+		.catch(error => console.log(error))
+	}
 
 	if (itemList.length > 0){
 		return(
-			<table>
-				<tbody>
-					{itemList}
-				</tbody>
-			</table>
+			<div>
+				<table>
+					<tbody>
+						{itemList}
+					</tbody>
+				</table>
+				<button onClick={handleClick}>Order</button>
+			</div>
 		)
 	}
 	else {
@@ -31,7 +54,7 @@ export default function Cart(){
 
 function RemoveButton(props){
 	const cart = useContext(listContext)
-
+		
 	return(
 		<button onClick={ () => cart.removeItem(props.item)}>
 			Remove Item
