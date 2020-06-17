@@ -49,7 +49,7 @@ export default function Login(){
     )
 }
 
-function GroupRedirect(group) {
+export function GroupRedirect(group) {
 	if (group === 'Bartender'){
 		history.push('/orders')
 	}
@@ -60,5 +60,6 @@ function GroupRedirect(group) {
 		localStorage.clear()
 		history.push('/login')
 	}
+	return null
 	
 }

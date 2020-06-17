@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, Switch, Route, Redirect} from 'react-router-dom'
+import {Router, Switch, Route} from 'react-router-dom'
 import history from './history'
 import Login, {GroupRedirect} from './Login'
 import PrivateRoute from './PrivateRoute'
@@ -31,7 +31,7 @@ export default function App() {
 					<Cart />
 				</PrivateRoute>
 				<Route path='*'>
-					<GroupRedirect />
+					{GroupRedirect(localStorage.getItem('group'))}
 				</Route>
 			</Switch>
 		</Router>
