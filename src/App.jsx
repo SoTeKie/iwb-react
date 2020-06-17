@@ -28,7 +28,9 @@ export default function App() {
 					</Store>
 				</PrivateRoute>
 				<PrivateRoute exact path='/cart'>
-					<Cart />
+					<Store>
+						<Cart />
+					</Store>
 				</PrivateRoute>
 				<Route path='*'>
 					{GroupRedirect(localStorage.getItem('group'))}

@@ -59,8 +59,12 @@ export default function Store({children}){
 	}
 
 	function removeItem(removedItem){
-		const newItems = cart.items.filter( item => item.id !== removedItem.id)
+		const newItems = cart.items
 
+		const index = newItems.indexOf(removedItem)
+
+		newItems.splice(index, 1)
+		
 		setCart({...cart, items:newItems})
 	}
 }
