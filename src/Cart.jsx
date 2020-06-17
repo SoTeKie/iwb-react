@@ -24,6 +24,7 @@ export default function Cart(){
 				item_id: item.id,
 				quantity: item.amount
 			})
+			return null
 		})
 
 		appInstance.post('/orders/', {
