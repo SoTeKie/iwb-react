@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {appInstance} from './api_requests'
 import listContext from './list_context'
+
 export default function MakeOrder(){
 	const [items, setItems] = useState()
 
@@ -11,7 +12,7 @@ export default function MakeOrder(){
 	},[])
 
 	return (
-		items == null ? <h1>what</h1> : items.map(item => <Item key={item.id} item={item}/>)
+		items == null ? <h1>Loading</h1> : items.map(item => <Item key={item.id} item={item}/>)
 	)
 }
 
@@ -23,7 +24,7 @@ function Item(props){
 	return (
 		<div>
 			<h1>{props.item.name}</h1>
-			<h2>{props.item.price}</h2>
+			<h2>{props.item.price}$</h2>
 			<ContextButton item={props.item} text='+' fn={cart.incItem} />
 			<ContextButton item={props.item} text='-' fn={cart.decItem} />
 			<h2>{amount == null ? 0 : amount.amount}</h2>
