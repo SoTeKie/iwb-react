@@ -1,8 +1,22 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {appInstance} from './api_requests'
 import listContext from './list_context'
+import {Link} from 'react-router-dom'
 
 export default function MakeOrder(){
+	return (
+		<div>
+			<Items />
+			<Link to='/cart'>
+				<button>
+					Go to checkout
+				</button>
+			</Link>
+		</div>
+	)
+}
+
+function Items(){
 	const [items, setItems] = useState()
 
 	useEffect(() => {
