@@ -1,12 +1,13 @@
 import React from 'react'
 import {Router, Switch, Route, Redirect} from 'react-router-dom'
 import history from './history'
-import Login from './Login'
+import Login, {GroupRedirect} from './Login'
 import PrivateRoute from './PrivateRoute'
 import Orders from './Orders'
 import StartOrder from './StartOrder'
 import MakeOrder from './MakeOrder'
 import Store from './Store'
+import Cart from './Cart'
 
 export default function App() {
 	return (
@@ -26,8 +27,11 @@ export default function App() {
 						<MakeOrder />
 					</Store>
 				</PrivateRoute>
+				<PrivateRoute exact path='/cart'>
+					<Cart />
+				</PrivateRoute>
 				<Route path='*'>
-					<Redirect to='/login' />
+					<GroupRedirect />
 				</Route>
 			</Switch>
 		</Router>
