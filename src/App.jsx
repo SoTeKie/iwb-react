@@ -8,6 +8,8 @@ import StartOrder from './StartOrder'
 import MakeOrder from './MakeOrder'
 import Store from './Store'
 import Cart from './Cart'
+import Success from './Success'
+import Error from './Error'
 
 export default function App() {
 	return (
@@ -32,8 +34,14 @@ export default function App() {
 						<Cart />
 					</Store>
 				</PrivateRoute>
+				<Route exact path='/success'>
+					<Success />
+				</Route>
+				<Route exact path='/error'>
+					<Error />
+				</Route>
 				<Route path='*'>
-					{GroupRedirect(localStorage.getItem('group'))}
+					{() => GroupRedirect(localStorage.getItem('group'))}
 				</Route>
 			</Switch>
 		</Router>

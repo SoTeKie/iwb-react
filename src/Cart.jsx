@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import listContext from './list_context'
 import {appInstance} from './api_requests'
+import history from './history'
 
 export default function Cart(){
 	const cart = useContext(listContext)
@@ -32,8 +33,14 @@ export default function Cart(){
 			notes: '',
 			items: items
 		})
-		.then(response => console.log(response))
-		.catch(error => console.log(error))
+		.then(response => {
+			console.log(response)
+			history.push('/success')
+		})
+		.catch(error => {
+			console.log(error)
+			history.push('/error')
+		})
 	}
 
 	if (itemList.length > 0){
