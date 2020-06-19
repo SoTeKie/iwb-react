@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {GroupRedirect} from './Login'
+import {GroupRedirect} from '../Login'
 
 export default function Success(){
 

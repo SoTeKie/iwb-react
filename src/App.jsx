@@ -1,15 +1,15 @@
 import React from 'react'
 import {Router, Switch, Route} from 'react-router-dom'
-import history from './history'
+import history from './Helpers/history'
 import Login, {GroupRedirect} from './Login'
 import PrivateRoute from './PrivateRoute'
-import Orders from './Orders'
-import StartOrder from './StartOrder'
-import MakeOrder from './MakeOrder'
-import Store from './Store'
-import Cart from './Cart'
-import Success from './Success'
-import Error from './Error'
+import Orders from './BarComponents/Orders'
+import StartOrder from './TabComponents/StartOrder'
+import MakeOrder from './TabComponents/MakeOrder'
+import Cart from './TabComponents/Cart'
+import Success from './TabComponents/Success'
+import Error from './TabComponents/Error'
+import Store from './Store/Store'
 
 export default function App() {
 	return (

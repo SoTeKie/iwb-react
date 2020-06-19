@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {appInstance} from './api_requests'
-import listContext from './list_context'
+import {appInstance} from '../Helpers/api_requests'
+import listContext from '../Store/list_context'
 import {Link} from 'react-router-dom'
 
 export default function MakeOrder(){

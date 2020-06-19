@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {authInstance} from './api_requests'
-import history from './history'
+import {authInstance} from './Helpers/api_requests'
+import history from './Helpers/history'
 
 export default function Login(){
     const [username, setUsername] = useState('')

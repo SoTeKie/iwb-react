@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {appInstance} from './api_requests'
+import {appInstance} from '../Helpers/api_requests'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()

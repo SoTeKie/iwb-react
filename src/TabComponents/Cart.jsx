@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
-import listContext from './list_context'
-import {appInstance} from './api_requests'
-import history from './history'
+import listContext from '../Store/list_context'
+import {appInstance} from '../Helpers/api_requests'
+import history from '../Helpers/history'
 
 export default function Cart(){
 	const cart = useContext(listContext)
