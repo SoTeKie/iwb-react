@@ -3,16 +3,32 @@ import {appInstance} from '../Helpers/api_requests'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()
+	const [filters, setFilter] = useState({
+		isPaid: false,
+		isCompleted: false
+	})
 
 	useEffect(() => {
 		appInstance.get('orders/')
 		.then( response => setOrders(response.data))
 		.catch( error => console.log(error.response))
 	},[])
+
+	function filterOrders(order){
+		return (
+			  (((filters.isPaid === false) || (filters.isPaid === order.isPaid)) &&
+			   ((filters.isCompleted === false) || (filters.isCompleted === order.isCompleted)))
+		)
+	}
+
 	return(
 		orders == null ? 
 			<h1>No Orders</h1> : 
-			orders.map((order, index) => <Order key={index} order={order} />)
+			<div>
+				<button onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Show all' : 'Show only paid'}</button>
+				<button onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Show all' : 'Show only delivered'}</button>
+				{orders.filter(filterOrders).map((order, index) => <Order key={index} order={order} />)}
+			</div>
 	)
 }
 
