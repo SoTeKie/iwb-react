@@ -25,8 +25,34 @@ function Items(){
 		.catch(error => console.log(error))
 	},[])
 
+	const [category, setCategory] = useState(0)
+	const [categories, setCategories] = useState()
+
+	useEffect(() => {
+		appInstance.get('/categories')
+		.then(response => setCategories(response.data))
+		.catch(error => console.log(error))
+	},[])
+
+	function filterItems(item){
+		if (category === 0){
+			return true
+		}
+		return item.category === category
+	}
+
 	return (
-		items == null ? <h1>Loading</h1> : items.map(item => <Item key={item.id} item={item}/>)
+		<div>
+			<button onClick={() => setCategory(0)}>Show all</button>
+			{categories == null ? "" : categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat}/>)}
+			{items == null ? <h1>Loading</h1> : items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
+		</div>
+	)
+}
+
+function Category(props){
+	return(
+		<button onClick={() => props.fn(props.category.id)}>{props.category.name}</button>
 	)
 }
 
