@@ -4,20 +4,28 @@ import {appInstance} from '../Helpers/api_requests'
 export default function Orders (){
 	const [orders, setOrders] = useState()
 	const [filters, setFilter] = useState({
-		isPaid: false,
-		isCompleted: false
+		isPaid: true,
+		isCompleted: true
 	})
 
 	useEffect(() => {
 		appInstance.get('orders/')
 		.then( response => setOrders(response.data))
 		.catch( error => console.log(error.response))
+	},[filters])
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			appInstance.get('orders/')
+			.then( response => setOrders(response.data))
+			.catch( error => console.log(error.response))
+		}, 60000)
+		return () => clearInterval(interval)
 	},[])
 
 	function filterOrders(order){
 		return (
-			  (((filters.isPaid === false) || (filters.isPaid === order.isPaid)) &&
-			   ((filters.isCompleted === false) || (filters.isCompleted === order.isCompleted)))
+			   ((filters.isPaid || !(order.isPaid)) && (filters.isCompleted || !(order.isCompleted)))
 		)
 	}
 
@@ -25,9 +33,9 @@ export default function Orders (){
 		orders == null ? 
 			<h1>No Orders</h1> : 
 			<div>
-				<button onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Show all' : 'Show only paid'}</button>
-				<button onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Show all' : 'Show only delivered'}</button>
-				{orders.filter(filterOrders).map((order, index) => <Order key={index} order={order} />)}
+				<button onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Show unpaid' : 'Show all'}</button>
+				<button onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Show undelivered' : 'Show all'}</button>
+				{orders.filter(filterOrders).map(order => <Order key={order.id} order={order} />)}
 			</div>
 	)
 }
