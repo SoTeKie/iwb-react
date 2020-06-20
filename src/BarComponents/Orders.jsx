@@ -17,12 +17,36 @@ export default function Orders (){
 }
 
 function Order(props){
+	const [isCompleted, setIsCompleted] = useState(props.order.isCompleted)
+	const [isPaid, setIsPaid] = useState(props.order.isPaid)
+
+	function handlePClick(){
+		appInstance.patch(`/orders/${props.order.id}/`,{
+			isPaid: !isPaid,
+		})
+		.then(response => {
+			setIsPaid(!isPaid)
+			console.log(response)
+		})
+		.catch(error => console.log(error))
+	}
+
+	function handleCClick(){
+		appInstance.patch(`/orders/${props.order.id}/`,{
+			isCompleted: !isCompleted,
+		})
+		.then(response => {
+			console.log(response)
+			setIsCompleted(!isCompleted)
+		})
+		.catch(error => console.log(error))
+	}
 	return(
 		<div>
 			<h1>{props.order.__str__}</h1>
 			<h2>at {props.order.customer}</h2>
-			<h3>{props.order.isCompleted ? "Delivered" : "Not delivered"}</h3>
-			<h3>{props.order.isPaid ? "Paid" : "Not paid"}</h3>
+			<button onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
+			<button onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
 			{props.order.items.map( (item, index) => <Item key={index} item={item} />)}
 			<GetPrice items={props.order.items} />
 		</div>
