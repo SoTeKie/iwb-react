@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {appInstance} from '../Helpers/api_requests'
+import buttonStyles from '../Stylesheets/Button.module.css'
+import orderStyles from '../Stylesheets/Button.module.css'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()
@@ -30,11 +32,13 @@ export default function Orders (){
 	}
 
 	return(
-		orders == null ? 
+		(orders == null || orders.length === 0)? 
 			<h1>No Orders</h1> : 
 			<div>
-				<button onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Show unpaid' : 'Show all'}</button>
-				<button onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Show undelivered' : 'Show all'}</button>
+				<div className={buttonStyles.container}>
+					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid and unpaid' : 'Open tab'}</button>
+					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Delivered and undelivered' : 'Undelivered'}</button>
+				</div>
 				{orders.filter(filterOrders).map(order => <Order key={order.id} order={order} />)}
 			</div>
 	)
