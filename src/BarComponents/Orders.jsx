@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {appInstance} from '../Helpers/api_requests'
 import buttonStyles from '../Stylesheets/Button.module.css'
-import orderStyles from '../Stylesheets/Button.module.css'
+import orderStyles from '../Stylesheets/Orders.module.css'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()
@@ -39,7 +39,9 @@ export default function Orders (){
 					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid and unpaid' : 'Open tab'}</button>
 					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Delivered and undelivered' : 'Undelivered'}</button>
 				</div>
-				{orders.filter(filterOrders).map(order => <Order key={order.id} order={order} />)}
+				<div>
+					{orders.filter(filterOrders).map(order => <Order key={order.id} order={order} />)}
+				</div>
 			</div>
 	)
 }
@@ -70,9 +72,8 @@ function Order(props){
 		.catch(error => console.log(error))
 	}
 	return(
-		<div>
-			<h1>{props.order.__str__}</h1>
-			<h2>at {props.order.customer}</h2>
+		<div className={orderStyles.order}>
+			<h1>{props.order.__str__} - at {props.order.customer}</h1>
 			<button onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
 			<button onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
 			{props.order.items.map( (item, index) => <Item key={index} item={item} />)}
