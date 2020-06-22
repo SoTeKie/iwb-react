@@ -74,10 +74,12 @@ function Order(props){
 	return(
 		<div className={orderStyles.order}>
 			<h1>{props.order.__str__} - at {props.order.customer}</h1>
-			<button onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
-			<button onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
+			<div className={orderStyles.buttons}>
+				<button onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
+				<button onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
+			</div>
 			{props.order.items.map( (item, index) => <Item key={index} item={item} />)}
-			<GetPrice items={props.order.items} />
+			<GetPrice className={orderStyles.price} items={props.order.items} />
 		</div>
 	)
 }
