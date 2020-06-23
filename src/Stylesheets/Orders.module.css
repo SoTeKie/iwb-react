@@ -6,10 +6,39 @@
 	grid-template-columns: 50% 50%;
 }
 
+.name {
+	text-align: center;
+}
+
 .price {
-	
+	grid-column: 1;	
+	text-align: center;
 }
 
-.buttons{
+.buttons {
+	grid-column: 2;
 }
 
+.button {
+	border: none;
+	width: 100%;
+	line-height: 40px;
+	text-align: center;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	outline: none;
+}
+
+.complete {
+	background-color: #428f38;
+}
+
+.incomplete {
+	background-color: #cf6c61;
+}
+
+.item {
+	grid-column: 1;
+	text-align: center;
+}
