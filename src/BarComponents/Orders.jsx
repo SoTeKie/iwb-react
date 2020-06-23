@@ -40,7 +40,7 @@ export default function Orders (){
 					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Delivered and undelivered' : 'Undelivered'}</button>
 				</div>
 				<div>
-					{orders.filter(filterOrders).map(order => <Order key={order.id} order={order} />)}
+					{orders.filter(filterOrders).reverse().map(order => <Order key={order.id} order={order} />)}
 				</div>
 			</div>
 	)
@@ -70,29 +70,36 @@ function Order(props){
 			setIsCompleted(!isCompleted)
 		})
 		.catch(error => console.log(error))
+
 	}
+
+	const color = isState => isState ? orderStyles.complete : orderStyles.incomplete
+
 	return(
 		<div className={orderStyles.order}>
-			<h1>{props.order.__str__} - at {props.order.customer}</h1>
+			<h1 className={orderStyles.name}>{props.order.__str__} - at {props.order.customer}</h1>
 			<div className={orderStyles.buttons}>
-				<button onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
-				<button onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
+				<button className={`${orderStyles.button} ${color(isCompleted)}`} onClick={handleCClick}>{isCompleted ? "Delivered" : "Not delivered"}</button>
+				<button className={`${orderStyles.button} ${color(isPaid)}`} onClick={handlePClick}>{isPaid ? "Paid" : "Not paid"}</button>
 			</div>
-			{props.order.items.map( (item, index) => <Item key={index} item={item} />)}
-			<GetPrice className={orderStyles.price} items={props.order.items} />
+			{props.order.items.map( (item, index) => <Item  key={index} item={item} />)}
+			<GetPrice  items={props.order.items} />
 		</div>
 	)
 }
 
 function Item(props){
 	return(
-		<h3>{props.item.name + " x" + props.item.quantity}</h3>
+		<h3 className={orderStyles.item}>{props.item.name + " x" + props.item.quantity}</h3>
 	)
 }
 
 function GetPrice(props){
 	const price = props.items.reduce((price, item) => price + (item.price*item.quantity), 0)
 	return (
-		<h3>{price}$</h3>
+		<div className={orderStyles.price}>
+			<hr />
+			<h3>{price}$</h3>
+		</div>
 	)
 }
