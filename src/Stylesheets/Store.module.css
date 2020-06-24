@@ -1,0 +1,17 @@
+.button {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border: none;
+	outline: none;
+	background-color: #f7f7f7;
+	line-height: 40px;
+
+}
+
+.container {
+	position: absolute; 
+	left: 50%; 
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
