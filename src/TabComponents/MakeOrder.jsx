@@ -2,17 +2,12 @@ import React, {useState, useEffect, useContext} from 'react'
 import {appInstance} from '../Helpers/api_requests'
 import listContext from '../Store/list_context'
 import {Link} from 'react-router-dom'
+import btStyles from '../Stylesheets/Button.module.css'
+import orStyles from '../Stylesheets/Order.module.css'
 
 export default function MakeOrder(){
 	return (
-		<div>
-			<Items />
-			<Link to='/cart'>
-				<button>
-					Go to checkout
-				</button>
-			</Link>
-		</div>
+		<Items />
 	)
 }
 
@@ -43,8 +38,15 @@ function Items(){
 
 	return (
 		<div>
-			<button onClick={() => setCategory(0)}>Show all</button>
-			{categories == null ? "" : categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat}/>)}
+			<div className={btStyles.container}>
+			<Link to='/cart'>
+				<button style={{backgroundColor: "#428f38"}} className={btStyles.filterButton}>
+					Go to checkout
+				</button>
+			</Link>
+				<button className={btStyles.filterButton} onClick={() => setCategory(0)}>Show all</button>
+				{categories == null ? "" : categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat}/>)}
+			</div>
 			{items == null ? <h1>Loading</h1> : items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
 		</div>
 	)
@@ -52,7 +54,7 @@ function Items(){
 
 function Category(props){
 	return(
-		<button onClick={() => props.fn(props.category.id)}>{props.category.name}</button>
+		<button className={btStyles.filterButton} onClick={() => props.fn(props.category.id)}>{props.category.name}</button>
 	)
 }
 
@@ -62,13 +64,14 @@ function Item(props){
 	const amount = cart.items.find( item => item.id === props.item.id)
 
 	return (
-		<div>
+		<div className={orStyles.container}>
 			<h1>{props.item.name}</h1>
 			<h2>{props.item.price}$</h2>
-			<ContextButton item={props.item} text='+' fn={cart.incItem} />
-			<ContextButton item={props.item} text='-' fn={cart.decItem} />
+			<div>
+				<ContextButton item={props.item} text='+' fn={cart.incItem} />
+				<ContextButton item={props.item} text='-' fn={cart.decItem} />
+			</div>
 			<h2>{amount == null ? 0 : amount.amount}</h2>
-			<hr />
 		</div>	
 	)
 }
