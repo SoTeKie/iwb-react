@@ -2,6 +2,9 @@ import React, {useContext} from 'react'
 import listContext from '../Store/list_context'
 import {appInstance} from '../Helpers/api_requests'
 import history from '../Helpers/history'
+import styles from '../Stylesheets/Store.module.css'
+import btStyles from '../Stylesheets/Orders.module.css'
+import {Link} from 'react-router-dom'
 
 export default function Cart(){
 	const cart = useContext(listContext)
@@ -46,6 +49,7 @@ export default function Cart(){
 	if (itemList.length > 0){
 		return(
 			<div>
+				<BackButton />
 				<table>
 					<tbody>
 						{itemList}
@@ -56,8 +60,23 @@ export default function Cart(){
 		)
 	}
 	else {
-		return <h1>Cart is empty</h1>
+		return (
+			<div>
+				<h1 className={styles.container}>Cart is empty</h1>
+				<BackButton />
+			</div>
+		)
 	}
+}
+
+function BackButton(){
+	return (
+		<Link to='/make-order/'>
+			<button className={btStyles.button} style={{backgroundColor: "#f7f7f7"}}>
+				Go back
+			</button>
+		</Link>
+	)
 }
 
 function RemoveButton(props){

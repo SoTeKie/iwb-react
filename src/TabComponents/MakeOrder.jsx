@@ -39,13 +39,13 @@ function Items(){
 	return (
 		<div>
 			<div className={btStyles.container}>
-			<Link to='/cart'>
-				<button style={{backgroundColor: "#428f38"}} className={btStyles.filterButton}>
-					Go to checkout
-				</button>
-			</Link>
 				<button className={btStyles.filterButton} onClick={() => setCategory(0)}>Show all</button>
 				{categories == null ? "" : categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat}/>)}
+				<Link to='/cart'>
+					<button style={{backgroundColor: "#428f38"}} className={btStyles.filterButton}>
+						Go to checkout
+					</button>
+				</Link>
 			</div>
 			{items == null ? <h1>Loading</h1> : items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
 		</div>

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {GroupRedirect} from '../Login'
+import styles from '../Stylesheets/Store.module.css'
 
 export default function Success(){
 
@@ -10,6 +11,6 @@ export default function Success(){
 	},[])
 
 	return(
-		<h1>Your order was a success!</h1>
+		<h1 className={styles.container}>Your order was a success!</h1>
 	)
 }
