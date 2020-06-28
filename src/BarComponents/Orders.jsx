@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {appInstance} from '../Helpers/api_requests'
 import buttonStyles from '../Stylesheets/Button.module.css'
 import orderStyles from '../Stylesheets/Orders.module.css'
+import cntStyles from '../Stylesheets/Store.module.css'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()
@@ -33,7 +34,7 @@ export default function Orders (){
 
 	return(
 		(orders == null || orders.length === 0)? 
-			<h1>No Orders</h1> : 
+			<h1 className={cntStyles.container}>No Orders</h1> : 
 			<div>
 				<div className={buttonStyles.container}>
 					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid and unpaid' : 'Open tab'}</button>
