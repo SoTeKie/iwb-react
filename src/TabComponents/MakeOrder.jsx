@@ -47,7 +47,9 @@ function Items(){
 					</button>
 				</Link>
 			</div>
-			{items == null ? <h1>Loading</h1> : items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
+			<div className={orStyles.container} style={{gridGap: "5px", backgroundColor:"#e8e8e8", marginTop: "10px"}}>
+				{items == null ? <h1>Loading</h1> : items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
+			</div>
 		</div>
 	)
 }
@@ -68,18 +70,18 @@ function Item(props){
 			<h1>{props.item.name}</h1>
 			<h2>{props.item.price}$</h2>
 			<div>
-				<ContextButton item={props.item} text='+' fn={cart.incItem} />
-				<ContextButton item={props.item} text='-' fn={cart.decItem} />
+				<ContextButton item={props.item} icon='fas fa-plus' fn={cart.incItem} />
+				<ContextButton item={props.item} icon='fas fa-minus' fn={cart.decItem} />
 			</div>
-			<h2>{amount == null ? 0 : amount.amount}</h2>
+			<h2>{amount == null ? 0 : amount.amount}x</h2>
 		</div>	
 	)
 }
 
 function ContextButton(props){
 	return(
-		<button onClick={() => props.fn(props.item)}>
-			{props.text}	
+		<button className={orStyles.button} onClick={() => props.fn(props.item)}>
+			<i className={props.icon}></i>		
 		</button>
 	)
 }
