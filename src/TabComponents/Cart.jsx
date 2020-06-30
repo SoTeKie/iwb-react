@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import listContext from '../Store/list_context'
 import {appInstance} from '../Helpers/api_requests'
 import history from '../Helpers/history'
@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 
 export default function Cart(){
 	const cart = useContext(listContext)
+	const [notes, setNotes] = useState()
 
 	const itemList = cart.items.map( (item, index) => {
 		return (
@@ -33,7 +34,7 @@ export default function Cart(){
 
 		appInstance.post('/orders/', {
 			customer: localStorage.getItem('user'),
-			notes: '',
+			notes: notes,
 			items: items
 		})
 		.then(response => {
@@ -53,6 +54,9 @@ export default function Cart(){
 				<table>
 					<tbody>
 						{itemList}
+						<tr>
+							<td><textarea placeholder="Feel free to write any extra requests here." value={notes} onChange={e => setNotes(e.target.value)}></textarea></td>
+						</tr>
 					</tbody>
 				</table>
 				<button onClick={handleClick}>Order</button>
