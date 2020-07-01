@@ -42,3 +42,9 @@
 	grid-column: 1;
 	text-align: center;
 }
+
+.note {
+	grid-column: 2;
+	word-wrap: break-word;
+	text-align: center;
+}
