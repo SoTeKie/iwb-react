@@ -43,7 +43,7 @@ function Items(){
 				{categories == null ? "" : categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat}/>)}
 				<Link to='/cart'>
 					<button style={{backgroundColor: "#428f38"}} className={btStyles.filterButton}>
-						Go to checkout
+						<i style={{fontSize:"20px"}} class="fas fa-shopping-cart">Cart</i>
 					</button>
 				</Link>
 			</div>

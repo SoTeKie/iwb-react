@@ -4,6 +4,7 @@ import {appInstance} from '../Helpers/api_requests'
 import history from '../Helpers/history'
 import styles from '../Stylesheets/Store.module.css'
 import btStyles from '../Stylesheets/Orders.module.css'
+import awStyles from '../Stylesheets/Order.module.css'
 import {Link} from 'react-router-dom'
 
 export default function Cart(){
@@ -87,8 +88,8 @@ function RemoveButton(props){
 	const cart = useContext(listContext)
 		
 	return(
-		<button onClick={ () => cart.removeItem(props.item)}>
-			Remove Item
+		<button className={awStyles.button} onClick={ () => cart.removeItem(props.item)}>
+			<i class="far fa-times-circle"></i>
 		</button>
 	)
 }

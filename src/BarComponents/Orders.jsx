@@ -85,7 +85,7 @@ function Order(props){
 			</div>
 			{props.order.items.map( (item, index) => <Item  key={index} item={item} />)}
 			<GetPrice  items={props.order.items} />
-			<p className={orderStyles.note}>Customer requests: <br />"{props.order.notes}"</p>
+			{props.order.notes === "" || <p className={orderStyles.note}>Customer requests: <br />"{props.order.notes}"</p>}
 		</div>
 	)
 }
