@@ -6,7 +6,8 @@ export default function Store({children}){
 		items: [],
 		incItem: incItem,
 		decItem: decItem,
-		removeItem: removeItem
+		removeItem: removeItem,
+		getTotal: getTotal
 	}
 
 	const [cart, setCart] = useState(initialState)
@@ -22,6 +23,7 @@ export default function Store({children}){
 
 		const newItem = {
 			id:incrementedItem.id,
+			price:incrementedItem.price,
 			name:incrementedItem.name,
 			amount:1
         }
@@ -66,5 +68,11 @@ export default function Store({children}){
 		newItems.splice(index, 1)
 		
 		setCart({...cart, items:newItems})
+	}
+
+	function getTotal(){
+		const total = cart.items.reduce((price, item) => price + (item.price*item.amount), 0)
+
+		return <p>{total}$</p> 	
 	}
 }

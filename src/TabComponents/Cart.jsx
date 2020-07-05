@@ -5,6 +5,7 @@ import history from '../Helpers/history'
 import styles from '../Stylesheets/Store.module.css'
 import btStyles from '../Stylesheets/Orders.module.css'
 import awStyles from '../Stylesheets/Order.module.css'
+import cartStyles from '../Stylesheets/Cart.module.css'
 import {Link} from 'react-router-dom'
 
 export default function Cart(){
@@ -13,12 +14,10 @@ export default function Cart(){
 
 	const itemList = cart.items.map( (item, index) => {
 		return (
-			<tr key={index}>
-				<td>{item.name}</td>
-				<td>{item.price}</td>
-				<td>{'x'+item.amount}</td>
-				<td>{<RemoveButton item={item} />}</td>
-			</tr>
+			<div key={index} className={cartStyles.itemContainer}>
+				<p className={cartStyles.info}>{item.name} {'x'+item.amount} - {item.price * item.amount}$ </p>
+				{<RemoveButton item={item} />}
+			</div>
 		)
 	})
 	
@@ -52,15 +51,13 @@ export default function Cart(){
 		return(
 			<div>
 				<BackButton />
-				<table>
-					<tbody>
-						{itemList}
-						<tr>
-							<td><textarea placeholder="Feel free to write any extra requests here." value={notes} onChange={e => setNotes(e.target.value)}></textarea></td>
-						</tr>
-					</tbody>
-				</table>
-				<button onClick={handleClick}>Order</button>
+				{itemList}
+				<hr />
+				<div className={cartStyles.container}>
+					{cart.getTotal()}
+					<textarea className={awStyles.notes}placeholder="Feel free to write any extra requests here." value={notes} onChange={e => setNotes(e.target.value)}></textarea>
+					<button className={awStyles.orderBtn} onClick={handleClick}>Confirm your order.</button>
+				</div>
 			</div>
 		)
 	}
@@ -89,7 +86,7 @@ function RemoveButton(props){
 		
 	return(
 		<button className={awStyles.button} onClick={ () => cart.removeItem(props.item)}>
-			<i class="far fa-times-circle"></i>
+			<i className="far fa-times-circle"></i>
 		</button>
 	)
 }

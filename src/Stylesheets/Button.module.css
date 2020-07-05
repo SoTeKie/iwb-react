@@ -19,4 +19,6 @@
 	outline: none;
 }
 
-
+.filterButton:nth-child(even) {
+	background-color: #f0f0f0;
+}
