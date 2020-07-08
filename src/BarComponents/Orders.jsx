@@ -3,6 +3,7 @@ import {appInstance} from '../Helpers/api_requests'
 import buttonStyles from '../Stylesheets/Button.module.css'
 import orderStyles from '../Stylesheets/Orders.module.css'
 import cntStyles from '../Stylesheets/Store.module.css'
+import {Link} from 'react-router-dom'
 
 export default function Orders (){
 	const [orders, setOrders] = useState()
@@ -38,7 +39,10 @@ export default function Orders (){
 			<div>
 				<div className={buttonStyles.container}>
 					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid and unpaid' : 'Open tab'}</button>
-					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Delivered and undelivered' : 'Undelivered'}</button>
+					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  '(Un)delivered' : 'Undelivered'}</button>
+					<Link to='/mark-items/'>
+						<button className={buttonStyles.filterButton} style={{backgroundColor:'#428f38'}}>View Items</button>
+					</Link>
 				</div>
 				<div>
 					{orders.filter(filterOrders).reverse().map(order => <Order key={order.id} order={order} />)}
