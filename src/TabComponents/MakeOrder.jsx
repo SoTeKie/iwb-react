@@ -18,7 +18,7 @@ function Items(){
 		appInstance.get('/items')
 		.then(response => setItems(response.data))
 		.catch(error => console.log(error))
-	},[])
+	},[category])
 
 	const [category, setCategory] = useState(0)
 	const [categories, setCategories] = useState()
