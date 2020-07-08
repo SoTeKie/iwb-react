@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import {appInstance} from '../Helpers/api_requests'
 import btStyles from '../Stylesheets/Button.module.css'
 import itStyles from '../Stylesheets/Mark.module.css'
@@ -11,8 +12,6 @@ export default function Items(){
 		.then(response => setItems(response.data))
 		.catch(error => console.log(error))
 	},[])
-
-
 
 	const [category, setCategory] = useState(0)
 	const [categories, setCategories] = useState()
@@ -38,6 +37,9 @@ export default function Items(){
 			<div className={btStyles.container}>
 				<button className={btStyles.filterButton} onClick={() => setCategory(0)}>Show all</button>
 				{categories.map(cat => <Category key={cat.id} fn={setCategory} category={cat} />)}
+				<Link to='/orders/'>
+					<button className={btStyles.filterButton} style={{backgroundColor: '#428f38'}}>Go to orders</button>
+				</Link>
 			</div>
 			{items.filter(filterItems).map(item => <Item key={item.id} item={item}/>)}
 		</div>
