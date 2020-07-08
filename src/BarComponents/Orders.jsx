@@ -38,8 +38,8 @@ export default function Orders (){
 			<h1 className={cntStyles.container}>No Orders</h1> : 
 			<div>
 				<div className={buttonStyles.container}>
-					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid and unpaid' : 'Open tab'}</button>
-					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  '(Un)delivered' : 'Undelivered'}</button>
+					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isPaid: !filters.isPaid})}>{filters.isPaid ? 'Paid/unpaid' : 'Open tab'}</button>
+					<button className={buttonStyles.filterButton} onClick={() => setFilter({...filters, isCompleted: !filters.isCompleted})}>{filters.isCompleted ?  'Delivered/Undelivered' : 'Undelivered'}</button>
 					<Link to='/mark-items/'>
 						<button className={buttonStyles.filterButton} style={{backgroundColor:'#428f38'}}>View Items</button>
 					</Link>
