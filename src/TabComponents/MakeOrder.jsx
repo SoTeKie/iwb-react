@@ -30,10 +30,7 @@ function Items(){
 	},[])
 
 	function filterItems(item){
-		if (category === 0){
-			return true
-		}
-		return item.category === category
+		return category === 0 || item.category === category 
 	}
 
 	return (
