@@ -12,14 +12,6 @@ export default function MakeOrder(){
 }
 
 function Items(){
-	const [items, setItems] = useState()
-
-	useEffect(() => {
-		appInstance.get('/items')
-		.then(response => setItems(response.data))
-		.catch(error => console.log(error))
-	},[category])
-
 	const [category, setCategory] = useState(0)
 	const [categories, setCategories] = useState()
 
@@ -28,6 +20,14 @@ function Items(){
 		.then(response => setCategories(response.data))
 		.catch(error => console.log(error))
 	},[])
+
+	const [items, setItems] = useState()
+
+	useEffect(() => {
+		appInstance.get('/items')
+		.then(response => setItems(response.data))
+		.catch(error => console.log(error))
+	},[category])
 
 	function filterItems(item){
 		return (category === 0 || item.category === category) && item.in_stock 
