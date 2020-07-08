@@ -30,7 +30,7 @@ function Items(){
 	},[])
 
 	function filterItems(item){
-		return category === 0 || item.category === category 
+		return (category === 0 || item.category === category) && item.in_stock 
 	}
 
 	return (
