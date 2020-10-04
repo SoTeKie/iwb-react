@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from './history'
 
-const baseURL = 'http://192.168.142.101:8000/api/'
+const baseURL = `${process.env.REACT_APP_HOST_IP_ADDRESS}/api/`
 
 export const authInstance = axios.create({
     baseURL: `${baseURL}auth-token/`,
